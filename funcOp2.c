@@ -16,7 +16,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	tmp = (*stack)->next;
 
 	(*stack)->n = tmp->n;
-	tmp->n= num;
+	tmp->n = num;
 }
 
 /**
@@ -39,7 +39,7 @@ void add(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * mop - opcode nop doesn't do anything
+ * nop - opcode nop doesn't do anything
  * @stack: pointer to pointer to the first node
  * @line_number: file line number
  */
