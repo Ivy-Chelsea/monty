@@ -49,7 +49,7 @@ void pchar(stack_T **stack, unsigned int line_number)
 {
 	if (!*stack)
 		error_handle(stack, line_number, 12);
-	if((*stack)->n < 0 || (*stack)->n > 127)
+	if ((*stack)->n < 0 || (*stack)->n > 127)
 		error_handle(stack, line_number, 13);
 	printf("%c\n", (*stack)->n);
 }
@@ -84,7 +84,7 @@ void pstr(stack_t **stack, unsigned int line_number)
  * @stack: pointer to the first node pointer
  * @line_number: file line number
  */
-void rotl(stack_t **stack, unsigned int line_numebr)
+void rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
 	(void)lin_number;
