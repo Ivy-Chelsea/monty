@@ -35,7 +35,7 @@ void add(stack_t **stack, unsigned int line_number)
 
 	(*stack)->n += tmp->n;
 	free(tmp);
-	(8stack)->prev = NULL;
+	(*stack)->prev = NULL;
 }
 
 /**
