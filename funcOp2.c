@@ -45,7 +45,7 @@ void mod(stack_t **stack, unsigned int line_number)
  * @stack: pointer to first node pointer
  * @line_number: file line number
  */
-void pchar(stack_T **stack, unsigned int line_number)
+void pchar(stack_t **stack, unsigned int line_number)
 {
 	if (!*stack)
 		error_handle(stack, line_number, 12);
@@ -87,7 +87,7 @@ void pstr(stack_t **stack, unsigned int line_number)
 void rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
-	(void)lin_number;
+	(void)line_number;
 
 	if ((*stack) && (*stack)->next)
 	{
