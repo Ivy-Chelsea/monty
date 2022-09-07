@@ -37,7 +37,7 @@ void push_q(stack_t **stack, unsigned int line_number)
 	if (!new)
 		error_handle(stack, line_number, 2);
 
-	new->n = global.data;
+	new->n = globals.data;
 	new->next = NULL;
 	if (!*stack)
 	{
