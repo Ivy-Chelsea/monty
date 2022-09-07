@@ -1,12 +1,12 @@
 #include "monty.h"
 
 /**
- * error_check - handle error message.
+ * error_handle - handle error message.
  * @stack: pointer to a pointer of first node
  * @line_number: the line number in the file.
  * @error_type: value specifying error type.
  */
-void error_check(stack_t **stack, unsigned int line_number, int error_type)
+void error_handle(stack_t **stack, unsigned int line_number, int error_type)
 {
 	if (error_type == 0)
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
