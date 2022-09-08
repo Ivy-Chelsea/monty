@@ -1,43 +1,43 @@
 #include "monty.h"
 
 /**
- * mul - multiplies the second top element with the top element of the stack
+ * _mul - multiplies the second top element with the top element of the stack
  * @stack: pointer to first node pointer
  * @line_number: file line number
  */
-void mul(stack_t **stack, unsigned int line_number)
+void _mul(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	{
+		error_set(short_stack_error(line_number, "mul"));
+		return;
+	}
 
-	if (!*stack || !(*stack)->next)
-		error_handle(stack, line_number, 10);
-	tmp = *stack;
-	*stack = (*stack)->next;
-
-	(*stack)->n *= tmp->n;
-	free(tmp);
-	(*stack)->prev = NULL;
+	(*stack)->next->next->n *= (*stack)->next->n;
+	_pop(stack, line_number);
 }
 
 /**
- * mod - finds modulo of second top node divided by top node
+ * _mod - finds modulo of second top node divided by top node
  * @stack: pointer to first node pointer
  * @line_number: file line number
  */
-void mod(stack_t **stack, unsigned int line_number)
+void _mod(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	{
+		error_set(short_stack_error(line_number, "mod"));
+		retrun;
+	}
+	
+	if ((*stack)->next->n == 0)
+	{
+		error_set(divide_error(line_number));
+		return;
+	}
 
-	if (!*stack || !(*stack)->next)
-		error_handle(stack, line_number, 11);
-	if ((*stack)->n == 0)
-		error_handle(stack, line_number, 9);
-	tmp = *stack;
-	*stack = (*stack)->next;
-
-	(*stack)->n %= tmp->n;
-	free(tmp);
-	(*stack)->prev = NULL;
+	(*stack)->next->next->n %= (*stack)->next->n;
+	_pop(stack, line_number);
 }
 
 /**
