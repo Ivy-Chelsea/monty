@@ -1,30 +1,33 @@
 #include "monty.h"
 
 /**
- * rotr - rotates the stack to the bottom
+ * _rotr - rotates the stack to the bottom
  * @stack: pointer to the first node pointer
  * @line_number: file line number
  */
-void rotr(stack_t **stack, unsigned int line_number)
+void _rotr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
-	(void)line_number;
+	stack_t *top, *bottom;
 
-	if ((*stack) && (*stack)->next)
-	{
-		tmp = *stack;
-		while (tmp->next->next)
-			tmp = tmp->next;
-		(*stack)->prev = tmp->next;
-		tmp->next->prev = NULL;
-		tmp->next->next = *stack;
-		tmp->next = NULL;
-		*stack = (*stack)->prev;
-	}
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+		return;
+
+	top = (*stack)->next;
+	bottom = (*stack)->next;
+	while (bottom->next != NULL)
+		bottom = bottom->next;
+
+	bottom->prev->next = NULL;
+	(*stack)->next = bottom;
+	bottom->prev = *stack;
+	bottom->next = top;
+	top->prev = bottom;
+	
+	(void)line_number;
 }
 
 /**
- * push_q - adds a new node at the end of a list
+ * _push_q - adds a new node at the end of a list
  * @stack: pointer to first node pointer
  * @line_number: current line number
  */
