@@ -9,7 +9,7 @@ void _swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp;
 
-	if ((*stack)->next == NULL || !(*stack)->next->next == NULL)
+	if (!*stack || !(*stack)->next)
 	{
 		error_set(short_stack_error(line_number, "swap"));
 		return;
