@@ -68,7 +68,7 @@ void _divide(stack_t **stack, unsigned int line_number)
 	
 	if ((*stack)->next->->n == 0)
 	{
-		error_set(divide_errorline_number));
+		error_set(divide_error(line_number));
 		return;
 	
 	}
