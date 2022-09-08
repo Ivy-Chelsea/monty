@@ -43,22 +43,14 @@ void _add(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * nop - opcode nop doesn't do anything
+ * _nop - opcode nop doesn't do anything
  * @stack: pointer to pointer to the first node
  * @line_number: file line number
  */
-void nop(stack_t **stack, unsigned int line_number)
+void _nop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
-
-	if (!*stack || !(*stack)->next)
-		error_handle(stack, line_number, 7);
-	tmp = *stack;
-	*stack = (*stack)->next;
-
-	(*stack)->n -= tmp->n;
-	free(tmp);
-	(*stack)->prev = NULL;
+	(void)stack;
+	(void)line_number;
 }
 
 /**
