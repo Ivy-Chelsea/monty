@@ -27,31 +27,12 @@ void _rotr(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * _push_q - adds a new node at the end of a list
+ * _queue - converts stack to queue
  * @stack: pointer to first node pointer
  * @line_number: current line number
  */
-void push_q(stack_t **stack, unsigned int line_number)
+void _queue(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new, *current;
-
-	current = *stack;
-	new = malloc(sizeof(stack_t));
-	if (!new)
-		error_handle(stack, line_number, 2);
-
-	new->n = globals.data;
-	new->next = NULL;
-	if (!*stack)
-	{
-		new->prev = NULL;
-		*stack = new;
-	}
-	else
-	{
-		while (current->next)
-			current = current->next;
-		new->prev = current;
-		current->next = new;
-	}
+	(*stack)->n = QUEUE;
+	(void)line_number
 }
