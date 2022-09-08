@@ -60,13 +60,13 @@ void _nop(stack_t **stack, unsigned int line_number)
  */
 void _divide(stack_t **stack, unsigned int line_number)
 {
-	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	if (!*stack || !(*stack)->next)
 	{
 		error_set(short_stack_error(line_number, "divide"));
 		return;
 	}
 	
-	if ((*stack)->next->->n == 0)
+	if ((*stack)->next == 0)
 	{
 		error_set(divide_error(line_number));
 		return;
