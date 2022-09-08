@@ -27,7 +27,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	{
 		if (op_toks[1][j] == '-' && j == 0)
 			continue;
-		if (op_toks[1][j] < '0' || op_toks[1][i] > '9')
+		if (op_toks[1][j] < '0' || op_toks[1][j] > '9')
 		{
 			error_set(no_int_error(line_number));
 			return;
@@ -35,7 +35,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	}
 	new->n = atoi(op_toks[1]);
 	
-	if (check_mode(*stack) == STACK
+	if (check_mode(*stack) == STACK)
 	{
 		tmp = (*stack)->next;
 		new->prev = *stack;
