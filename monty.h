@@ -4,27 +4,19 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-/**
- * struct globals_s - contains global variables
- * @data: value to initialize nodes
- * @fp: file pointer
- * @lineptr: pointer to a dynamic buffer
- * @token: pointer to next token
- */
-typedef struct globals_s
-{
-	int data;
-	FILE *fp;
-	char *lineptr, *token;
-} globals_t;
 
-extern globals_t globals;
+#define STACK 0
+#define QUEUE 1
+#define DELIMS " \n\t\a\b"
+
+/* global opcode tokens */
+extern char **op_toks;
 
 /**
  * struct stack_s - oubly linked list representation of a stack/queue
  * @n: integer
  * @prev: points to previous element of the stack/queue
- * @nexr: points to next element of the stack/queue
+ * @next: points to next element of the stack/queue
  */
 typedef struct stack_s
 {
@@ -44,36 +36,54 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/* primary interpreter functions */
+void free_stack(stack_t **stack);
+int init_stack(stack_t **stack);
+int check_mode(stack_t **stack);
+void free_tokens(void);
+unsigned int token_arr_len(void);
+int run_monty(FILE *cript_fd);
+void error_set(int error_code);
+
 /* funcOp0 */
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void free_stack(stack_t *stack);
+void _push(stack_t **stack, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
+void _stack(stack_t *stack);
 void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
+void _pop(stack_t **stack, unsigned int line_number);
 
 /* funcOp1 */
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
-void sub(stack_t **stack, unsigned int line_number);
-void divide(stack_t **stack, unsigned int line_number);
+void _swap(stack_t **stack, unsigned int line_number);
+void _add(stack_t **stack, unsigned int line_number);
+void _nop(stack_t **stack, unsigned int line_number);
+void _sub(stack_t **stack, unsigned int line_number);
+void _divide(stack_t **stack, unsigned int line_number);
 
 /* funcOp2 */
-void mul(stack_t **stack, unsigned int line_number);
-void mod(stack_t **stack, unsigned int line_number);
-void pchar(stack_t **stack, unsigned int line_number);
-void pstr(stack_t **stack, unsigned int line_number);
-void rotl(stack_t **stack, unsigned int line_number);
+void _mul(stack_t **stack, unsigned int line_number);
+void _mod(stack_t **stack, unsigned int line_number);
+void _pchar(stack_t **stack, unsigned int line_number);
+void _pstr(stack_t **stack, unsigned int line_number);
+void _rotl(stack_t **stack, unsigned int line_number);
 
 /* funcOp3 */
-void rotr(stack_t **stack, unsigned int line_number);
-void push_q(stack_t **stack, unsigned int line_number);
+void _rotr(stack_t **stack, unsigned int line_number);
+void _queue(stack_t **stack, unsigned int line_number);
 
-/* monty_check */
-void error_handle(stack_t **stack, unsigned int line_number, int error_type);
-void check_op(stack_t **stack, unsigned int line_number);
-void parse_arg(int argc, char *argv[]);
-void read_line(stack_t **stack);
-void parse_num(stack_t **stack, unsigned int line_number);
+/* custom standard library functions */
+char **strtow(char *str, char *delims);
+char *get_int(int n);
+
+/* error messages */
+int usage_error(void);
+int malloc_error(void);
+int f_open_error(char *filename);
+int unknown_op_error(char *opcode, unsigned int line_number);
+int no_int_error(unsigned int line_number);
+int pop_error(unsigned int line_number);
+int pint_error(unsigned int line_number);
+int short_stack_error(unsigned int line_number, char *op);
+int divide_error(unsigned int line_number);
+int pchar_error(unsigned int line_number, char *message);
 
 #endif
