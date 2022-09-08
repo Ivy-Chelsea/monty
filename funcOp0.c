@@ -73,18 +73,12 @@ void _pall(stack_t **stack, unsigned int line_number)
 	}
 }
 /**
- * free_stack - frees a list
+ * _stack - converts a queue to a stack
  * @stack: pointer to pointer of the first node
  */
-void free_stack(stack_t *stack)
+void _stack(stack_t *stack, unsigned int line_number)
 {
-	stack_t *tmp = (*stack)->next;
-
-	while (tmp)
-	{
-		printf("%d\n", tmp->n;
-		tmp = tmp->next;
-	}
+	(*stack)-> = STACK;
 	(void)line_number;
 }
 /**
