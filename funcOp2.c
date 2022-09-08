@@ -45,39 +45,41 @@ void _mod(stack_t **stack, unsigned int line_number)
  * @stack: pointer to first node pointer
  * @line_number: file line number
  */
-void pchar(stack_t **stack, unsigned int line_number)
+void _pchar(stack_t **stack, unsigned int line_number)
 {
-	if (!*stack)
-		error_handle(stack, line_number, 12);
-	if ((*stack)->n < 0 || (*stack)->n > 127)
-		error_handle(stack, line_number, 13);
-	printf("%c\n", (*stack)->n);
+	if ((*stack)->next == NULL)
+	{
+		error_set(pchar_error(line_number, "stack empty"));
+		return;
+	}
+	if ((*stack)->next->n < 0 || (*stack)->next->n > 127)
+	{
+		error_set(pchar_error(line_number
+					value out of range"));
+		return;
+	}
+	
+	printf("%c\n", (*stack)->next->n);
 }
 
 /**
- * pstr - prints string starting at the top of the stack
+ * _pstr - prints string starting at the top of the stack
  * @stack: pointer to first node pointer
  * @line_number: file line_number
  */
-void pstr(stack_t **stack, unsigned int line_number)
+void _pstr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *current;
-	(void)line_number;
-
-	current = *stack;
-	if (!current)
-		printf("\n");
-	else
+	stack_t *tmp = (*stack)->next;
+	
+	while (tmp && tmp->n != 0 && (tmp->n > 0 && tmp->n <= 127))
 	{
-		while (current)
-		{
-			if (current->n <= 0 || current->n > 127)
-				break;
-			printf("%c", current->n);
-			current = current->next;
-		}
-		printf("\n");
+		printf("%c", tmp->n);
+		tmp = tmp->next;
 	}
+	
+	printf("\n");
+	
+	(void)line_number;
 }
 /**
  * rotl - rotates the stack to the top
@@ -86,18 +88,20 @@ void pstr(stack_t **stack, unsigned int line_number)
  */
 void rotl(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp;
-	(void)line_number;
+	stack_t *top, *bottom;
 
-	if ((*stack) && (*stack)->next)
-	{
-		tmp = *stack;
-		*stack = (*stack)->next;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = (*stack)->prev;
-		(*stack)->prev->next = NULL;
-		(*stack)->prev->prev = tmp;
-		(*stack)->prev = NULL;
-	}
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+		return;
+		
+	top = (*stack)->next;
+	bottom = (*stack)->next;
+	while (bottom->next != NULL)
+		bottom = bottom->next;
+		
+	top->next = *stack;
+	(*stack)->next = top->next;
+	bottom->next = NULL;
+	top->prev = bottom;
+	
+	(void)line_number;
 }
