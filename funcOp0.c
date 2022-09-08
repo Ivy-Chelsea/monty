@@ -82,19 +82,23 @@ void _stack(stack_t *stack, unsigned int line_number)
 	(void)line_number;
 }
 /**
- * pint - prints value at the top of the stack
+ * _pint - prints value at the top of the stack
  * @stack: pointer to pointer of the first node
  * @line_number: file line number
  */
-void pint(stack_t **stack, unsigned int line_number)
+void _pint(stack_t **stack, unsigned int line_number)
 {
-	if (!*stack)
-		error_handle(stack, line_number, 3);
-	printf("%d\n", (*stack)->n);
+	if ((*stack)->next == NULL)
+	{
+		error_set(pint_error(line_number));
+		return;
+	}
+	
+	printf("%d\n", (*stack)->next->n);
 }
 
 /**
- * pop - removes the top element of the stack
+ * _pop - removes the top element of the stack
  * @stack: pointer to pointer of the first node
  * @line_number: file line number
  */
