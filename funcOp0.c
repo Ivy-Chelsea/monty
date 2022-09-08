@@ -78,7 +78,7 @@ void _pall(stack_t **stack, unsigned int line_number)
  */
 void _stack(stack_t *stack, unsigned int line_number)
 {
-	(*stack)-> = STACK;
+	(*stack)->n = STACK;
 	(void)line_number;
 }
 /**
