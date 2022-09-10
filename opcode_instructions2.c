@@ -5,7 +5,7 @@
  * @doubly: head of linked list
  * @cline: line number
  */
-void _queue(stack_t **doubly, unsihned int cline)
+void _queue(stack_t **doubly, unsigned int cline)
 {
 	(void)doubly;
 	(void)cline;
