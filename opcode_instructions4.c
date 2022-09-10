@@ -5,7 +5,7 @@
  * @dooubly: linked list head
  * @cline: line nummber
  */
-void _rotl(stack_t **doubly, unsigned int clie)
+void _rotl(stack_t **doubly, unsigned int cline)
 {
 	stack_t *aux1 = NULL;
 	stack_t *aux2 = NULL;
@@ -20,7 +20,7 @@ void _rotl(stack_t **doubly, unsigned int clie)
 	aux1 = (*doubly)->next;
 	aux2 = *doubly;
 
-	fpr (; aux2->next != NULL; aux2 = aux2->next)
+	for (; aux2->next != NULL; aux2 = aux2->next)
 		;
 
 	aux1->prev = NULL;
@@ -40,13 +40,13 @@ void _rotr(stack_t **doubly, unsigned int cline)
 	stack_t *aux = NULL;
 	(void)cline;
 
-	if (*doubly) == NULL)
+	if (*doubly == NULL)
 		return;
 
 	if ((*doubly)->next == NULL)
 		return;
 
-	aux = *doublt;
+	aux = *doubly;
 
 	for (; aux->next != NULL; aux = aux->next)
 		;
