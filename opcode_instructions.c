@@ -13,7 +13,7 @@ void _push(stack_t **doubly, unsigned int cline)
 
 	if (!vglo.arg)
 	{
-		printf(2, "L%u: ", cline);
+		dprintf(2, "L%u: ", cline);
 		dprintf(2, "usage: push integer\n");
 		free_vglo();
 		exit(EXIT_FAILURE);
