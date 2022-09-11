@@ -26,7 +26,7 @@ void _div(stack_t **doubly, unsigned int cline)
 
 	if ((*doubly)->n == 0)
 	{
-		fprintf(2, "L%u: division by zero\n", cline);
+		dprintf(2, "L%u: division by zero\n", cline);
 		free_vglo();
 		exit(EXIT_FAILURE);
 	}
